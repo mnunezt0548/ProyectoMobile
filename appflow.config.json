@@ -1,3 +1,7 @@
 {
-    "iosPath": "ios"
+    "platforms": ["ios", "android"],
+    "ios": {
+      "path": "ios"
+    }
   }
+  
