@@ -1,0 +1,21 @@
+<ion-content>
+  <div class="container">
+    <!-- Flecha de retroceso -->
+    <ion-button fill="clear" (click)="goBack()" class="back-button">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+
+    <h2>Detalles de la Asignatura</h2>
+    <p>{{ asignatura.nombre }} ({{ asignatura.codigo }})</p>
+
+    <ion-button class="register-btn" (click)="startQRScanner()">Registrar Asistencia</ion-button>
+
+    <div id="qr-reader" style="width: 100%; margin-top: 20px;"></div>
+
+    <div class="progress-container">
+      <ion-label>Asistencia</ion-label>
+      <ion-progress-bar [value]="attendanceProgress / 100" [color]="progressBarColor"></ion-progress-bar>
+      <p>{{ attendanceProgress }}% de asistencia</p> <!-- Muestra el porcentaje -->
+    </div>
+  </div>
+</ion-content>

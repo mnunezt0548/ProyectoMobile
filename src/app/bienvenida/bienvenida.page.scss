@@ -1,0 +1,144 @@
+.container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Alinea el contenido hacia arriba */
+  align-items: center;
+  height: 100%;
+  padding: 20px;
+  background-color: #000;
+  color: white;
+}
+
+.header-content {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px; /* Espaciado adicional entre logo y título */
+  display: flex;
+  justify-content: center; /* Centra el logo en la parte superior */
+  align-items: center;
+}
+
+.logo-header {
+  width: 150px; /* Tamaño del logo */
+  height: auto;
+}
+
+.logout-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: #d9534f;
+  font-size: 20px;
+  z-index: 10;
+}
+
+h1 {
+  font-size: 2rem; /* Tamaño de fuente para título */
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  padding: 0 10px; /* Aseguramos que el texto no se corte en pantallas pequeñas */
+}
+
+.current-subject {
+  margin-top: 20px;
+}
+
+p {
+  font-size: 1.2rem;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+ion-card.asignatura-card {
+  width: 220px; /* Ajustamos el tamaño de las tarjetas */
+  background-color: #333;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+ion-card:hover {
+  transform: scale(1.05);
+  background-color: #555; 
+}
+
+ion-card-header {
+  background-color: #444;
+  padding: 10px;
+  border-radius: 10px 10px 0 0;
+}
+
+ion-card-title {
+  font-size: 1.3rem;
+  color: #fff;
+}
+
+ion-card-content {
+  padding: 10px;
+  color: #ccc;
+}
+
+ion-card-content p {
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .logo-header {
+    width: 120px; 
+  }
+
+  h1 {
+    font-size: 1.5rem; 
+  }
+
+  .logout-btn {
+    font-size: 18px; 
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.2rem; 
+    margin-top: 10px;
+  }
+
+  .logo-header {
+    width: 100px; 
+  }
+
+  .logout-btn {
+    font-size: 16px; 
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 5px; 
+  }
+
+  h1 {
+    font-size: 1rem; 
+    margin-top: 10px;
+  }
+
+  .logo-header {
+    width: 80px;
+  }
+
+  .logout-btn {
+    font-size: 14px;
+  }
+}

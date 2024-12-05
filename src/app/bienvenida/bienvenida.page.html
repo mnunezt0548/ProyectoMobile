@@ -1,0 +1,33 @@
+<ion-content>
+  <div class="container">
+    <div class="header-content">
+      <ion-img src="assets/Imagenes/Logo_DuocUC.svg.png" class="logo-header"></ion-img>
+      <ion-button fill="clear" class="logout-btn" (click)="logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </div>
+
+    <h1>Bienvenido {{ fullName }}</h1>
+
+    <div class="current-subject">
+      <h2>Clase actual:</h2>
+      <p *ngIf="asignaturaActual">
+        {{ asignaturaActual.nombre }} ({{ asignaturaActual.inicio }} - {{ asignaturaActual.fin }})
+      </p>
+      <p *ngIf="!asignaturaActual">No hay clases en este momento.</p>
+    </div>
+
+    <p>Selecciona una asignatura para ver más detalles:</p>
+
+    <div class="card-container">
+      <ion-card class="asignatura-card" *ngFor="let asignatura of asignaturas" (click)="viewAsignatura(asignatura)">
+        <ion-card-header>
+          <ion-card-title>{{ asignatura.nombre }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>Haz clic para ver más detalles.</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

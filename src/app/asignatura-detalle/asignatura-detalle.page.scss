@@ -1,0 +1,60 @@
+.container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+  background-color: #000;
+  color: white;
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.register-btn {
+  width: 80%;
+  max-width: 300px;
+  margin-bottom: 20px;
+  background-color: #007bff;
+  padding: 10px;
+}
+
+.progress-container {
+  width: 80%;
+  max-width: 300px;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+ion-progress-bar {
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* Estilos para la flecha de retroceso */
+.back-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10;
+  background: transparent;
+}
+
+/* Estilo para el porcentaje de asistencia */
+.progress-container p {
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+h2, p {
+  font-family: Arial, sans-serif;
+}

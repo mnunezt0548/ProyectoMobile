@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+  text-align: center;
+  background-color: #000;
+}
+
+.logo {
+  width: 200px;
+  height: auto; 
+  margin-bottom: 30px;
+}
+
+h1 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: white;
+}
+
+ion-item {
+  width: 100%;
+  max-width: 350px;
+  margin: 10px 0;
+}
+
+ion-input {
+  --padding-start: 10px;
+  --padding-end: 10px;
+}
+
+ion-button {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 350px;
+}
+
+ion-icon {
+  color: #ccc;
+  cursor: pointer;
+}
