@@ -1,0 +1,12 @@
+/* Estilo para el botón */
+.small-button {
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 20px; /* Bordes redondeados */
+  }
+  
+  /* Asegurarse de que el input de hora solo muestre horas y minutos */
+  ion-datetime {
+    --padding-start: 10px;
+    --padding-end: 10px;
+  }

@@ -40,16 +40,17 @@ ion-progress-bar {
   margin-top: 10px;
 }
 
-/* Estilos para la flecha de retroceso */
+
 .back-button {
   position: absolute;
   top: 10px;
   left: 10px;
   z-index: 10;
   background: transparent;
+  color: #777272;
 }
 
-/* Estilo para el porcentaje de asistencia */
+
 .progress-container p {
   font-size: 1rem;
   margin-top: 10px;

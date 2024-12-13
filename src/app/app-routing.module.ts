@@ -27,6 +27,10 @@ const routes: Routes = [
     path: 'matematicas',
     loadChildren: () => import('./matematicas/matematicas.module').then( m => m.MatematicasPageModule)
   },
+  {
+    path: 'registro-actividad',
+    loadChildren: () => import('./registro-actividad/registro-actividad.module').then( m => m.RegistroActividadPageModule)
+  },
 ];
 
 @NgModule({

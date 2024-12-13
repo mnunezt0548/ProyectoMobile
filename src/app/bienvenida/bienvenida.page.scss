@@ -2,7 +2,7 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Alinea el contenido hacia arriba */
+  justify-content: flex-start; 
   align-items: center;
   height: 100%;
   padding: 20px;
@@ -13,14 +13,14 @@
 .header-content {
   position: relative;
   width: 100%;
-  margin-bottom: 20px; /* Espaciado adicional entre logo y título */
+  margin-bottom: 20px; 
   display: flex;
-  justify-content: center; /* Centra el logo en la parte superior */
+  justify-content: center; 
   align-items: center;
 }
 
 .logo-header {
-  width: 150px; /* Tamaño del logo */
+  width: 150px; 
   height: auto;
 }
 
@@ -28,17 +28,17 @@
   position: absolute;
   top: 10px;
   left: 10px;
-  color: #d9534f;
+  color: #777272;
   font-size: 20px;
   z-index: 10;
 }
 
 h1 {
-  font-size: 2rem; /* Tamaño de fuente para título */
+  font-size: 2rem; 
   margin-top: 20px;
   margin-bottom: 20px;
   text-align: center;
-  padding: 0 10px; /* Aseguramos que el texto no se corte en pantallas pequeñas */
+  padding: 0 10px; 
 }
 
 .current-subject {
@@ -58,7 +58,7 @@ p {
 }
 
 ion-card.asignatura-card {
-  width: 220px; /* Ajustamos el tamaño de las tarjetas */
+  width: 220px; 
   background-color: #333;
   border-radius: 10px;
   cursor: pointer;

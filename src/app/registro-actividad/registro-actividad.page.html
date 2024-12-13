@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/bienvenida"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Registrar Actividad</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <ion-item>
+      <ion-label position="floating">Nombre de la Actividad</ion-label>
+      <ion-input [(ngModel)]="activity.name" placeholder="Escribe el nombre de la actividad"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Fecha y Hora de Entrega</ion-label>
+      <!-- Usamos un solo ion-datetime para seleccionar fecha y hora -->
+      <ion-datetime 
+        [(ngModel)]="activity.dateTime" 
+        displayFormat="YYYY-MM-DD HH:mm" 
+        pickerFormat="YYYY-MM-DD HH:mm"
+        [min]="minDate">
+      </ion-datetime>
+    </ion-item>
+
+    <ion-button 
+      expand="full" 
+      shape="round" 
+      class="small-button" 
+      (click)="saveActivity()">
+      Guardar Actividad
+    </ion-button>
+
+    <div *ngIf="activities.length > 0">
+      <h2>Actividades Guardadas</h2>
+      <ion-list>
+        <ion-item *ngFor="let activity of activities">
+          <ion-label>
+            <h3>{{ activity.name }}</h3>
+            <p>{{ activity.dateTime }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>

@@ -17,11 +17,14 @@ export class BienvenidaPage implements OnInit {
 
   asignaturaActual: { nombre: string; inicio: string; fin: string } | null = null;
 
+  // Para mostrar las actividades guardadas
+  activities: any[] = [];
+
   constructor(private router: Router) {}
 
   ngOnInit() {
     this.actualizarAsignatura();
-    // Actualiza cada minuto para reflejar cambios de horario
+    this.loadActivities();
     setInterval(() => this.actualizarAsignatura(), 60000);
   }
 
@@ -54,6 +57,17 @@ export class BienvenidaPage implements OnInit {
   }
 
   logout() {
-    this.router.navigate(['/home']); // Redirige al usuario a la página de inicio de sesión
+    this.router.navigate(['/home']);
+  }
+
+  // Cargar actividades guardadas desde localStorage
+  loadActivities() {
+    const activities = JSON.parse(localStorage.getItem('activities') || '[]');
+    this.activities = activities;
+  }
+
+  // Función para redirigir al registro de actividades
+  goToRecordatorio() {
+    this.router.navigate(['/registro-actividad']);
   }
 }

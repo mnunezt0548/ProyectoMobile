@@ -1,10 +1,29 @@
-<ion-content>
+<ion-menu side="start" menuId="first" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menú</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-item button (click)="logout()">
+        <ion-icon slot="start" name="log-out-outline"></ion-icon>
+        <ion-label>Cerrar sesión</ion-label>
+      </ion-item>
+      <ion-item button (click)="goToRecordatorio()">
+        <ion-icon slot="start" name="clipboard-outline"></ion-icon>
+        <ion-label>Registro de Actividades</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-content id="main-content">
   <div class="container">
     <div class="header-content">
       <ion-img src="assets/Imagenes/Logo_DuocUC.svg.png" class="logo-header"></ion-img>
-      <ion-button fill="clear" class="logout-btn" (click)="logout()">
-        <ion-icon name="log-out-outline"></ion-icon>
-      </ion-button>
+      <ion-menu-button class="logout-btn"></ion-menu-button>
     </div>
 
     <h1>Bienvenido {{ fullName }}</h1>
@@ -28,6 +47,18 @@
           <p>Haz clic para ver más detalles.</p>
         </ion-card-content>
       </ion-card>
+    </div>
+
+    <div *ngIf="activities.length > 0">
+      <h2>Recordatorio de Actividades</h2>
+      <ion-list>
+        <ion-item *ngFor="let activity of activities">
+          <ion-label>
+            <h3>{{ activity.name }}</h3>
+            <p>{{ activity.dateTime }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
     </div>
   </div>
 </ion-content>
