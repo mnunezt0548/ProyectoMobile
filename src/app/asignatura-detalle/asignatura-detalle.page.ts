@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { Html5QrcodeScanner } from 'html5-qrcode';
+import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 import { Router } from '@angular/router';
+import { AttendanceService } from '../services/attendance.service';
 
 @Component({
   selector: 'app-asignatura-detalle',
@@ -8,86 +9,86 @@ import { Router } from '@angular/router';
   styleUrls: ['./asignatura-detalle.page.scss'],
 })
 export class AsignaturaDetallePage {
-  asignatura: any = {
-    nombre: 'Calidad de Software',
-    codigo: '001D',
-    qrGenerado: 'QR54321'
-  };
-
+  scannedQRs: Set<string> = new Set();
+  attendanceHistory: { qr: string; date: string }[] = [];
   attendanceProgress: number = 0;
   progressBarColor: string = 'danger';
-  scannedQR: string = ''; 
+  result: string = '';
 
-  constructor(private router: Router) {
-    this.loadAttendance();
+  asignatura: any = {
+    nombre: 'Calidad de Software',
+    codigo: '002D',
+  };
+
+  constructor(private router: Router, private attendanceService: AttendanceService) {}
+
+  goBack() {
+    this.router.navigate(['/bienvenida']);
   }
 
-  loadAttendance() {
-    const savedAttendance = localStorage.getItem('attendance_' + this.asignatura.qrGenerado);
-    if (savedAttendance) {
-      this.attendanceProgress = parseInt(savedAttendance, 10);
-      this.updateProgressBarColor();
-    }
-  }
-
-  saveAttendance() {
-    localStorage.setItem('attendance_' + this.asignatura.qrGenerado, this.attendanceProgress.toString());
-  }
-
-  startQRScanner() {
+  async startQRScanner() {
     try {
-      const html5QrcodeScanner = new Html5QrcodeScanner(
-        'qr-reader',
-        {
-          fps: 10,
-          qrbox: { width: 250, height: 250 },
-        },
-        false
-      );
+      console.log('Verificando permisos...');
+      const permission = await BarcodeScanner.checkPermission({ force: true });
+      console.log('Permisos verificados:', permission);
 
-      html5QrcodeScanner.render(
-        (decodedText: string, decodedResult: any) => {
-          if (this.scannedQR !== decodedText) {
-            this.scannedQR = decodedText;
-            console.log(`Código escaneado: ${decodedText}`);
-            alert(`Código escaneado: ${decodedText}`);
-            html5QrcodeScanner.clear();
-            this.updateAttendanceProgress();
-            this.saveAttendance();
-          } else {
-            alert("Este código QR ya fue escaneado. Escanea un nuevo código.");
-          }
-        },
-        (error: any) => {
-          console.warn(`Error al escanear: ${error}`);
-        }
-      );
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.error('Error inicializando el escáner:', error.message);
+      if (permission.granted) {
+        console.log('Permiso concedido, iniciando escaneo...');
+        this.startScanning();
       } else {
-        console.error('Error desconocido:', error);
+        alert('Permiso de cámara denegado.');
       }
+    } catch (error) {
+      console.error('Error al verificar permisos:', error);
+      alert('Hubo un error al verificar los permisos.');
     }
+  }
+
+  async startScanning() {
+    try {
+      const result = await BarcodeScanner.startScan();
+
+      if (result.hasContent) {
+        const scannedQR = result.content;
+        console.log('Contenido escaneado:', scannedQR);
+
+        if (!this.isValidQR(scannedQR)) {
+          alert('Formato de QR inválido. Por favor, escanea un código válido.');
+          return;
+        }
+
+        if (this.attendanceService.isQRAlreadyScanned(scannedQR)) {
+          const asignaturaRegistrada = this.attendanceService.getQRAsignatura(scannedQR);
+          alert(`El código QR ya fue escaneado para la asignatura: ${asignaturaRegistrada}.`);
+          return;
+        }
+
+        const success = this.attendanceService.registerQR(scannedQR, this.asignatura.nombre);
+        if (success) {
+          const date = new Date().toLocaleString();
+          this.attendanceHistory.push({ qr: scannedQR, date });
+          alert(`Asistencia registrada en ${this.asignatura.nombre}\nCódigo: ${scannedQR}\nFecha: ${date}`);
+          this.updateAttendanceProgress();
+        } else {
+          alert('Hubo un problema al registrar el QR.');
+        }
+      } else {
+        alert('No se detectó ningún código QR.');
+      }
+    } catch (error) {
+      console.error('Error al escanear QR:', error);
+      alert('Hubo un error al intentar escanear el código QR.');
+    }
+  }
+
+  isValidQR(qr: string): boolean {
+    return true;
   }
 
   updateAttendanceProgress() {
     if (this.attendanceProgress < 100) {
       this.attendanceProgress += 10;
     }
-
-    this.updateProgressBarColor();
-  }
-
-  updateProgressBarColor() {
-    if (this.attendanceProgress >= 60) {
-      this.progressBarColor = 'success';
-    } else {
-      this.progressBarColor = 'danger';
-    }
-  }
-
-  goBack() {
-    this.router.navigate(['/bienvenida']);
+    this.progressBarColor = this.attendanceProgress >= 60 ? 'success' : 'danger';
   }
 }
